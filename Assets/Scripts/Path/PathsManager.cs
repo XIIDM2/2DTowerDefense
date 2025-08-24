@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class PathsManager : MonoBehaviour
+public class PathsManager : Singleton<PathsManager>
 {
-    public static PathsManager Instance; // Remake with singleton class
-
     // Paths information
     [System.Serializable]
     private struct PathInfo
@@ -16,17 +14,6 @@ public class PathsManager : MonoBehaviour
     }
 
     [SerializeField] private PathInfo[] _pathsInfo;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
 
     /// <summary>
     /// Return requested path
