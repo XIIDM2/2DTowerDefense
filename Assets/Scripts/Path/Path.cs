@@ -5,7 +5,7 @@ public class Path : MonoBehaviour
     // Array of pathpoints for a path;
     [SerializeField] private Transform[] _pathpoints;
 
-    private void Awake()
+    private void Start()
     {
         SetPathPoints();
     }
@@ -24,9 +24,9 @@ public class Path : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns path.
+    /// Returns Array of pathpoints
     /// </summary>
-    public Transform[] GetPath()
+    public Transform[] GetPathPoints()
     {   
         if (_pathpoints == null || _pathpoints.Length == 0)
         {
@@ -43,7 +43,7 @@ public class Path : MonoBehaviour
 
         if (_pathpoints == null || _pathpoints.Length == 0) return;
 
-        Gizmos.color = Color.red;
+        Gizmos.color = new Color(Random.Range(0, 1.0f), Random.Range(0, 1.0f), Random.Range(0, 1.0f), 0.8f);
 
         for (int i = 0; i < _pathpoints.Length; i++)
         {
