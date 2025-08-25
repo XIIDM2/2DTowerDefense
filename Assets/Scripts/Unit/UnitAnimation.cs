@@ -3,7 +3,6 @@ using UnityEngine;
 public class UnitAnimation : MonoBehaviour
 {
     private UnitMovement _movement;
-
     private Animator _animator;
 
     private void Awake()
@@ -15,9 +14,10 @@ public class UnitAnimation : MonoBehaviour
 
     private void Update()
     {
-        Vector2 direction = _movement.GetUnitDirection();
-        _animator.SetFloat("Horizontal", direction.x);
-        _animator.SetFloat("Vertical", direction.y);
-        _animator.SetFloat("MovementSpeed", _movement.GetUnitVelocity());
+        Vector2 Velocity = _movement.GetUnitVelocity();
+
+        _animator.SetFloat("Horizontal", Velocity.x);
+        _animator.SetFloat("Vertical", Velocity.y);
+        _animator.SetFloat("MovementSpeed", Velocity.magnitude);
     }
 }

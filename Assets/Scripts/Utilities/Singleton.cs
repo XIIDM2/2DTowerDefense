@@ -30,7 +30,7 @@ public abstract class SingletonPersistent<T> : Singleton<T> where T : MonoBehavi
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.root.gameObject);
 
         base.Awake();
     }
