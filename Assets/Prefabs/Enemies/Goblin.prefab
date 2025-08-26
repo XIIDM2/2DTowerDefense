@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f39b17ff55774a82a9bd37cc845db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _requestedPathType: 0
+  <RequestedPathType>k__BackingField: 0
   _distanceToNextPoint: 0.5
   _positionOffset: 0.5
 --- !u!114 &5436527872875395674

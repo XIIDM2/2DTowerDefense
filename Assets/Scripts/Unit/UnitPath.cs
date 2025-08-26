@@ -4,7 +4,9 @@ public class UnitPath : MonoBehaviour
 {
     public Vector3 PathPointPosition => _currentPathpointPosition;
 
-    [SerializeField] private PathTypes _requestedPathType;
+    [field: Tooltip("Current Unit`s path (this variable is for debug purpose only and does not affect Unit`s path")]
+    [field: SerializeField] public PathType RequestedPathType { get; private set; }
+
     [SerializeField] private float _distanceToNextPoint = 0.5f; // 0.5f is base value
 
     /// <summary>
@@ -20,7 +22,6 @@ public class UnitPath : MonoBehaviour
     // Setting path and first pathpoint
     private void Start()
     {
-        SetPath();
         UpdatePathPoint();
         SetOffsetPathPointPosition();
     }
@@ -36,6 +37,13 @@ public class UnitPath : MonoBehaviour
         }
     }
 
+    // Setting required path
+    public void SetPath(PathType requestedPathType)
+    {
+        _path = PathsManager.Instance.GetPath(requestedPathType);
+        RequestedPathType = requestedPathType;
+    }
+
     // Make a small random offset to a copy of pathpointposition to make units move more "live"
     private void SetOffsetPathPointPosition()
     {
@@ -44,11 +52,6 @@ public class UnitPath : MonoBehaviour
         _currentPathpointPosition = new Vector3 (_currentPathpoint.position.x + randomOffset.x, _currentPathpoint.position.y + randomOffset.y, _currentPathpoint.position.z);
     }
 
-    // Setting required path (need to be in start)
-    private void SetPath()
-    {
-        _path = PathsManager.Instance.GetPath(_requestedPathType);
-    }
 
     // Setting current pathpoint to move
     private void UpdatePathPoint()

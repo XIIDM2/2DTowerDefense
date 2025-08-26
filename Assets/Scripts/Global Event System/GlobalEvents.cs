@@ -1,5 +1,4 @@
-
 public enum GlobalEvents
 {
-
+    SpawnUnit,
 }

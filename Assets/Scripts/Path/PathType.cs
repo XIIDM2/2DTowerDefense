@@ -1,5 +1,8 @@
 // Path Types to choose - dont forget to add new path in Paths Manager aswell!
-public enum PathTypes
+public enum PathType
 {
-    Ground,
+    Road,
+    Forest,
+    Air,
+    Water,
 }

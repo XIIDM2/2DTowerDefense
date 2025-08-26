@@ -6,10 +6,10 @@ public class PathsManager : Singleton<PathsManager>
     [System.Serializable]
     private struct PathInfo
     {
-        [SerializeField] private PathTypes _type;
+        [SerializeField] private PathType _type;
         [SerializeField] private Path _path;
 
-        public PathTypes Type => _type;
+        public PathType Type => _type;
         public Path Path => _path;
     }
 
@@ -20,7 +20,7 @@ public class PathsManager : Singleton<PathsManager>
     /// </summary>
     /// <param name="pathType"></param>
     /// <returns></returns>
-    public Path GetPath(PathTypes pathType)
+    public Path GetPath(PathType pathType)
     {
         Path requestedPath = null;
 
