@@ -1,11 +1,7 @@
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
-    public event UnityAction OnHealthChanged;
-    public event UnityAction OnDeath;
-
     private int _maxHealth;
     private int _currentHealth;
 
@@ -17,6 +13,9 @@ public class Health : MonoBehaviour
         _maxHealth = 10;
         _currentHealth = _maxHealth;
     }
+    protected abstract void HealthChangedEventInvoke();
+
+    protected abstract void DeathEventInvoke();
 
     public int GetCurrentHealth()
     {
@@ -34,12 +33,12 @@ public class Health : MonoBehaviour
         if (_currentHealth <= 0) return;
 
         _currentHealth -= amount;
-        OnHealthChanged?.Invoke();
+        HealthChangedEventInvoke();
 
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            OnDeath?.Invoke();
+            DeathEventInvoke();
         }
     }
 
@@ -48,8 +47,10 @@ public class Health : MonoBehaviour
     {
         if (_currentHealth <= 0) return;
 
-        _currentHealth = Mathf.Clamp(_currentHealth + amount, _currentHealth, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
 
-        OnHealthChanged?.Invoke();
+        HealthChangedEventInvoke();
     }
+
+
 }

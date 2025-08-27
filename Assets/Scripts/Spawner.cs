@@ -14,13 +14,13 @@ public class Spawner : MonoBehaviour
     // We sign for a global event from messenger to spawn a unit when event happens
     private void OnEnable()
     {
-        Messenger<UnitType, PathType>.AddListener(GlobalEvents.SpawnUnit, SpawnUnit);
+        Messenger<UnitType, PathType>.AddListener(GameEvents.SpawnUnit, SpawnUnit);
     }
 
     // We resighn from a global event from messenger
     private void OnDisable()
     {
-        Messenger<UnitType, PathType>.RemoveListener(GlobalEvents.SpawnUnit, SpawnUnit);
+        Messenger<UnitType, PathType>.RemoveListener(GameEvents.SpawnUnit, SpawnUnit);
     }
 
     // Spawn unit created from factory (spawn position with random offset - check GetRandomSpawnPoint() method)

@@ -3,15 +3,15 @@ using UnityEngine;
 // Singleton for player instance
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public Health Health => _health;
+    public PlayerHealth Health => _health;
 
-    private Health _health;
+    private PlayerHealth _health;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _health = GetComponent<Health>();
+        _health = GetComponent<PlayerHealth>();
     }
 
 }

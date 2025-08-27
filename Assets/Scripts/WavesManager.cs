@@ -23,11 +23,11 @@ public class WavesManager : Singleton<WavesManager>
             public PathType PathType => _pathType;
             public int SpawnAmount => _spawnAmount;
             public float SpawnTimer => _spawnTimer;
-            public float SpawnInterval => _spawnInterval;
+            public float SpawnIntervalBetweenUnits => _spawnIntervalBetweenUnits;
 
             [SerializeField] private float _spawnTimer;
 
-            [SerializeField] private float _spawnInterval;
+            [SerializeField] private float _spawnIntervalBetweenUnits;
 
             [SerializeField] private UnitType _type;
             [SerializeField] private PathType _pathType;
@@ -42,11 +42,11 @@ public class WavesManager : Singleton<WavesManager>
 
     private void Start()
     {
-        StartCoroutine(SpawnWaveRoutine(_waves));
+        StartCoroutine(SpawnWavesRoutine(_waves));
     }
 
     // Coroutine which broadcasts event for spawner to spawn units in each waves with timers and pauses
-    private IEnumerator SpawnWaveRoutine(Wave[] waves)
+    private IEnumerator SpawnWavesRoutine(Wave[] waves)
     {
         foreach (Wave wave in waves)
         {
@@ -58,9 +58,9 @@ public class WavesManager : Singleton<WavesManager>
 
                 for (int i = 0; i < units.SpawnAmount; i++)
                 {
-                    Messenger<UnitType, PathType>.Broadcast(GlobalEvents.SpawnUnit, units.Type, units.PathType);
+                    Messenger<UnitType, PathType>.Broadcast(GameEvents.SpawnUnit, units.Type, units.PathType);
 
-                    yield return new WaitForSeconds(units.SpawnInterval);
+                    yield return new WaitForSeconds(units.SpawnIntervalBetweenUnits);
                 }
             }
         }

@@ -17,24 +17,24 @@ public class UnitMovement : MonoBehaviour
     private void Update()
     {
         // Unit direction vector and velocity
-        SetUnitVelocity();
+        SetVelocity();
 
         // Move unit to current pathpoint
         MoveToCurrentPoint();
         
 
         // Flip Horizontal unit direction to face movement direction correctly 
-        ChangeUnitHorizontallScale();
+        ChangeHorizontallScale();
     }
 
     // Returns Unit Velocity
-    public Vector2 GetUnitVelocity()
+    public Vector2 GetVelocity()
     {
         return _velocity;
     }
 
     // Calculate Unit Velocity (for animator mainly)
-    private void SetUnitVelocity()
+    private void SetVelocity()
     {
         Vector2 direction = (_currentPath.PathPointPosition - transform.position).normalized;
         _velocity = direction * _movementSpeed;
@@ -57,7 +57,7 @@ public class UnitMovement : MonoBehaviour
 
 
     // Swap Unit direction if moving in right direction
-    private void ChangeUnitHorizontallScale()
+    private void ChangeHorizontallScale()
     {
         Vector3 transformLocalScale = transform.localScale;
 
