@@ -2,32 +2,41 @@ using UnityEngine;
 
 public abstract class Health : MonoBehaviour
 {
-    private int _maxHealth;
+    protected int _maxHealth;
     private int _currentHealth;
 
-    //[Inject] private readonly CharacterData _characterData;
-
-    // Set health data
-    private void Awake()
+    // Set health data (maxHealth in inherit classes)
+    protected virtual void Start()
     {
-        _maxHealth = 10;
         _currentHealth = _maxHealth;
     }
+    // abstract events methods for different logic for different classes
     protected abstract void HealthChangedEventInvoke();
 
     protected abstract void DeathEventInvoke();
 
+    /// <summary>
+    /// Returns currentHealth
+    /// </summary>
+    /// <returns></returns>
     public int GetCurrentHealth()
     {
         return _currentHealth;
     }
 
+    /// <summary>
+    /// Returns maxHealth
+    /// </summary>
+    /// <returns></returns>
     public int GetMaxHealth()
     {
         return _maxHealth;
     }
 
-    // Apply damage to instance
+    /// <summary>
+    /// Apply damage to instance
+    /// </summary>
+    /// <param name="amount"></param>
     public void TakeDamage(int amount)
     {
         if (_currentHealth <= 0) return;
@@ -42,7 +51,10 @@ public abstract class Health : MonoBehaviour
         }
     }
 
-    // Apply healing to instance
+    /// <summary>
+    /// Apply healing to instance
+    /// </summary>
+    /// <param name="amount"></param>
     public void HealDamage(int amount)
     {
         if (_currentHealth <= 0) return;

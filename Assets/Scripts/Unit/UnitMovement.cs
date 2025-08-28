@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 public class UnitMovement : MonoBehaviour
 {
@@ -9,9 +10,17 @@ public class UnitMovement : MonoBehaviour
 
     private UnitPath _currentPath;
 
+    [Inject] private readonly UnitData _UnitData;
+
     private void Awake()
     {
         _currentPath = GetComponent<UnitPath>();
+    }
+    
+    // Set values from scriptableobject
+    private void Start()
+    {
+        _movementSpeed = _UnitData.MovementSpeed;
     }
 
     private void Update()
@@ -27,7 +36,10 @@ public class UnitMovement : MonoBehaviour
         ChangeHorizontallScale();
     }
 
-    // Returns Unit Velocity
+    /// <summary>
+    /// Returns Unit Velocity
+    /// </summary>
+    /// <returns></returns>
     public Vector2 GetVelocity()
     {
         return _velocity;

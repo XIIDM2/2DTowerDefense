@@ -17,20 +17,26 @@ public class AudioSystem : SingletonPersistent<AudioSystem>
 
     private void Start()
     {
-
         _sfxSource.playOnAwake = false;
 
         _musicSource.playOnAwake = true;
         _musicSource.loop = true;
         _musicSource.priority = 60;
-
     }
 
+    /// <summary>
+    /// Play requested AudioClip
+    /// </summary>
+    /// <param name="clip"></param>
     public void PlayClip(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
     }
 
+    /// <summary>
+    /// Play requested music
+    /// </summary>
+    /// <param name="music"></param>
     public void PlayMusic(AudioClip music)
     {
         _musicSource.clip = music;

@@ -1587,27 +1587,27 @@ MonoBehaviour:
   _pauseBetweenWaves: 2
   _waves:
   - _waveUnits:
-    - _spawnTimer: 1
+    - _spawnTimer: 0
       _spawnIntervalBetweenUnits: 0
       _type: 0
       _pathType: 0
       _spawnAmount: 1
-    - _spawnTimer: 2
-      _spawnIntervalBetweenUnits: 0
-      _type: 3
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 3
-      _spawnIntervalBetweenUnits: 0
-      _type: 2
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 4
+    - _spawnTimer: 1
       _spawnIntervalBetweenUnits: 0
       _type: 1
       _pathType: 0
       _spawnAmount: 1
-    - _spawnTimer: 4
+    - _spawnTimer: 1
+      _spawnIntervalBetweenUnits: 0
+      _type: 2
+      _pathType: 0
+      _spawnAmount: 1
+    - _spawnTimer: 1
+      _spawnIntervalBetweenUnits: 0
+      _type: 3
+      _pathType: 0
+      _spawnAmount: 1
+    - _spawnTimer: 1
       _spawnIntervalBetweenUnits: 0
       _type: 4
       _pathType: 0
@@ -18721,6 +18721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906573099}
   - component: {fileID: 1906573100}
+  - component: {fileID: 1906573101}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -18753,6 +18754,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41ad210747860f34b991cbc3d2714e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1906573101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906573098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc607aafcd17aa5458ec923357be6f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1934038006

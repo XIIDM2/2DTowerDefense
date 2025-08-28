@@ -9,28 +9,32 @@ public class Factory
     // Dictionary with unit`s names and prefabs
     private Dictionary<string, GameObject> _unitDictionary = new Dictionary<string, GameObject>();
 
-    // creating unit link to prefab
+    /// <summary>
+    /// Creates unit link to prefab
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public async UniTask<GameObject> CreateUnit(UnitType type)
     {
-        // converting type to label (label must be with same type name)
+        // Converting type to label (label must be with same type name)
         string label = type.ToString();
 
         GameObject requestedUnit = null;
 
-        // if unit exists in dict, assign unit
+        // Ff unit exists in dict, assign unit
         if (_unitDictionary.TryGetValue(label, out GameObject unit))
         {
             requestedUnit =  unit;
         }
-        else // load unit prefab from addressables and assign unit, if fail to download from addressables, throw global exception
+        else // Load unit prefab from addressables and assign unit, if fail to download from addressables, throw global exception
         {
             AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(label);
 
             try
             {
-                // try to assign unit
+                // Try to assign unit
                 requestedUnit = await handle.ToUniTask();
-                //add unit to dictionary
+                // Add unit to dictionary
                 _unitDictionary[label] = requestedUnit;
             }
             catch (System.Exception exception)
@@ -40,7 +44,7 @@ public class Factory
 
         }
 
-        // if unit not assigned throw logError
+        // If unit not assigned throw logError
         if (requestedUnit == null)
         {
             Debug.LogError("Failed to load Unit prefab by label: " + label);

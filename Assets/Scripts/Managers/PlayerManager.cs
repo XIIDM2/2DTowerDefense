@@ -13,5 +13,4 @@ public class PlayerManager : Singleton<PlayerManager>
 
         _health = GetComponent<PlayerHealth>();
     }
-
 }

@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UnitPath : MonoBehaviour
 {
-    public Vector3 PathPointPosition => _currentPathpointPosition;
+    public event UnityAction OnPathEnd;
+    public Vector3 PathPointPosition => _currentMovePosition;
 
     [field: Tooltip("Current Unit`s path (this variable is for debug purpose only and does not affect Unit`s path")]
     [field: SerializeField] public PathType RequestedPathType { get; private set; }
@@ -10,14 +12,14 @@ public class UnitPath : MonoBehaviour
     [SerializeField] private float _distanceToNextPoint = 0.5f; // 0.5f is base value
 
     /// <summary>
-    ///  value to offset pathpoint position to make units move a little random so game feels "live"
+    ///  Value to offset pathpoint position to make units move a little random so game feels "live"
     /// </summary>
     [SerializeField] private float _positionOffset = 0.5f; // 0.5f is base value
 
     private Path _path;
     private int _pathpointIndex = 0;
     private Transform _currentPathpoint;
-    private Vector3 _currentPathpointPosition; // Saving copy of currentPathpoint position to avoid shuffling path, insted changing copy 
+    private Vector3 _currentMovePosition; // Saving copy of currentPathpoint position to avoid shuffling path, insted changing copy 
 
     // Setting path and first pathpoint
     private void Start()
@@ -37,7 +39,10 @@ public class UnitPath : MonoBehaviour
         }
     }
 
-    // Setting required path
+    /// <summary>
+    /// Setting required path
+    /// </summary>
+    /// <param name="requestedPathType"></param>
     public void SetPath(PathType requestedPathType)
     {
         _path = PathsManager.Instance.GetPath(requestedPathType);
@@ -49,7 +54,7 @@ public class UnitPath : MonoBehaviour
     {
         Vector2 randomOffset = Random.insideUnitCircle * _positionOffset;
 
-        _currentPathpointPosition = new Vector3 (_currentPathpoint.position.x + randomOffset.x, _currentPathpoint.position.y + randomOffset.y, _currentPathpoint.position.z);
+        _currentMovePosition = new Vector3 (_currentPathpoint.position.x + randomOffset.x, _currentPathpoint.position.y + randomOffset.y, _currentPathpoint.position.z);
     }
 
 
@@ -59,8 +64,7 @@ public class UnitPath : MonoBehaviour
         // if last point - do logic
         if (IsPathEnd())
         {
-            // event to dmg player
-            Destroy(gameObject);
+            OnPathEnd?.Invoke();
             return;
         }
 

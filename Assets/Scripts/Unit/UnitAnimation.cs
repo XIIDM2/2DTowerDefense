@@ -5,6 +5,8 @@ public class UnitAnimation : MonoBehaviour
 {
     private const string DISOLVE_STATE_NAME = "Disolve";
 
+    [SerializeField] private float _timeToDisolve = 3.0f; // standart is 3.0f;
+
     private UnitMovement _movement;
     private UnitHealth _health;
 
@@ -16,10 +18,7 @@ public class UnitAnimation : MonoBehaviour
         _health = transform.root.GetComponent<UnitHealth>();
         _animator = GetComponent<Animator>();
     }
-    private void Start()
-    {
-        OnDeath();
-    }
+
     private void OnEnable()
     {
         _health.OnDeath += OnDeath;
@@ -30,7 +29,7 @@ public class UnitAnimation : MonoBehaviour
         _health.OnDeath -= OnDeath;
     }
 
-
+    // animate units
     private void Update()
     {
         Vector2 Velocity = _movement.GetVelocity();
@@ -40,6 +39,7 @@ public class UnitAnimation : MonoBehaviour
         _animator.SetFloat("MovementSpeed", Velocity.magnitude);
     }
 
+    // change animation state to death state, if unit has dissolve animation start disolve routine)
     private void OnDeath()
     {
         _animator.SetBool("IsDead", true);
@@ -51,11 +51,20 @@ public class UnitAnimation : MonoBehaviour
         }
     }
 
+    /// change animation state to disolve state after time
     private IEnumerator DisolveRoutine()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(_timeToDisolve);
 
         _animator.SetBool("IsDisolve", true);
 
+    }
+
+    /// <summary>
+    /// Special method for animation event to destroy object after death/disolve animation (FOR ANIMATION EVENT ONLY)
+    /// </summary>
+    public void AEDestroyGameObject()
+    {
+        Destroy(transform.root.gameObject);
     }
 }

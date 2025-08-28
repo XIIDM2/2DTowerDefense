@@ -6,11 +6,11 @@ public class PathsManager : Singleton<PathsManager>
     [System.Serializable]
     private struct PathInfo
     {
-        [SerializeField] private PathType _type;
-        [SerializeField] private Path _path;
-
         public PathType Type => _type;
         public Path Path => _path;
+
+        [SerializeField] private PathType _type;
+        [SerializeField] private Path _path;
     }
 
     [SerializeField] private PathInfo[] _pathsInfo;
@@ -22,26 +22,40 @@ public class PathsManager : Singleton<PathsManager>
     /// <returns></returns>
     public Path GetPath(PathType pathType)
     {
+        if (_pathsInfo == null || _pathsInfo.Length == 0)
+        {
+            Debug.LogError("Failed to find any path to work with");
+            return null;
+        }
+
         Path requestedPath = null;
+        // First path to backup if requestedPath was not found
+        Path firstFoundPath = null;
 
         // Trying to find a requested path
         foreach (PathInfo pathEntry in _pathsInfo)
         {
+            if (firstFoundPath == null)
+            {
+                firstFoundPath = pathEntry.Path;
+            }
+
             if (pathEntry.Type == pathType)
             {
                 requestedPath = pathEntry.Path;
                 break;
             }
+
+
         }
 
-        // if didnt find a path - logerror (later do with try - catch when we set path to default if failed to find requested)
+        // if did not find a path - logWarning and setting path to first found one
         if (requestedPath == null)
         {
-            Debug.LogError("Coudnt find a path for unity" + pathType);
+            Debug.LogWarning("Could not find a path for unit, setting first found path" + pathType);
+            requestedPath = firstFoundPath;
         }
 
         return requestedPath;
     }
-
-
 }

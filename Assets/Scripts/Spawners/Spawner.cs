@@ -23,12 +23,31 @@ public class Spawner : MonoBehaviour
         Messenger<UnitType, PathType>.RemoveListener(GameEvents.SpawnUnit, SpawnUnit);
     }
 
-    // Spawn unit created from factory (spawn position with random offset - check GetRandomSpawnPoint() method)
+    /// <summary>
+    /// Spawn unit created from factory (spawn position with random offset - check GetRandomSpawnPoint() method)
+    /// </summary>
+    /// <param name="unitType"></param>
+    /// <param name="pathType"></param>
     public async void SpawnUnit(UnitType unitType, PathType pathType)
     {
         GameObject unitPrefab = await (_factory.CreateUnit(unitType));
 
         GameObject unit = Instantiate(unitPrefab, GetRandomSpawnPoint(), Quaternion.identity);
+
+        unit.GetComponent<UnitPath>().SetPath(pathType);
+    }
+
+    /// <summary>
+    /// Overload method with possibility to set position
+    /// </summary>
+    /// <param name="unitType"></param>
+    /// <param name="position"></param>
+    /// <param name="pathType"></param>
+    public async void SpawnUnit(UnitType unitType, Vector2 position, PathType pathType)
+    {
+        GameObject unitPrefab = await (_factory.CreateUnit(unitType));
+
+        GameObject unit = Instantiate(unitPrefab, position, Quaternion.identity);
 
         unit.GetComponent<UnitPath>().SetPath(pathType);
     }
