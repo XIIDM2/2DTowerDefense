@@ -63,7 +63,7 @@ public class UnitAnimation : MonoBehaviour
     /// <summary>
     /// Special method for animation event to destroy object after death/disolve animation (FOR ANIMATION EVENT ONLY)
     /// </summary>
-    public void AEDestroyGameObject()
+    private void AEDestroyGameObject()
     {
         Destroy(transform.root.gameObject);
     }

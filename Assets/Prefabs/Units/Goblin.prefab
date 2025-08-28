@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7533173680542613732}
   - component: {fileID: 8159174986574969347}
   - component: {fileID: -1027951425478959568}
+  - component: {fileID: 4301200949537172080}
   - component: {fileID: 6673801908621611257}
   m_Layer: 0
   m_Name: Goblin
@@ -88,6 +89,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00a640d6e457208479e9c2e26e8480b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4301200949537172080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422115259116329252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428dc053652ea94498b5335bd59f61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6673801908621611257
@@ -278,3 +291,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d37334a4937d347bb420499f4684a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeToDisolve: 3

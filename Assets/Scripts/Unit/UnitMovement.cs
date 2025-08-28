@@ -45,6 +45,14 @@ public class UnitMovement : MonoBehaviour
         return _velocity;
     }
 
+    /// <summary>
+    /// Reset velocity to zero
+    /// </summary>
+    public void ResetVelocity()
+    {
+        _velocity = Vector2.zero;
+    }
+
     // Calculate Unit Velocity (for animator mainly)
     private void SetVelocity()
     {
