@@ -6,25 +6,25 @@ public class UnitController : MonoBehaviour
     private UnitAttack _attack;
     private UnitMovement _movement;
     private UnitHealth _health;
-    private UnitPath _path;
-    private UnitAnimation _animation;
+    protected UnitPath _path;
+    protected UnitAnimation _animation;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _attack = GetComponent<UnitAttack>();
         _movement = GetComponent<UnitMovement>();
         _health = GetComponent<UnitHealth>();
         _path = GetComponent<UnitPath>();
-        _animation = GetComponent<UnitAnimation>();
+        _animation = GetComponentInChildren<UnitAnimation>();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _health.OnDeath += OnDeath;
         _path.OnPathEnd += OnPathEnd;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _health.OnDeath -= OnDeath;
         _path.OnPathEnd -= OnPathEnd;
@@ -35,7 +35,7 @@ public class UnitController : MonoBehaviour
         _attack.ApplyDamageToPlayer();
     }
 
-    private void OnDeath()
+    protected virtual void OnDeath()
     {
         _attack.enabled = false;
         _movement.enabled = false;

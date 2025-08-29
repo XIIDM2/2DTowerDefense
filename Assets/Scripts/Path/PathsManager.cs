@@ -45,8 +45,6 @@ public class PathsManager : Singleton<PathsManager>
                 requestedPath = pathEntry.Path;
                 break;
             }
-
-
         }
 
         // if did not find a path - logWarning and setting path to first found one

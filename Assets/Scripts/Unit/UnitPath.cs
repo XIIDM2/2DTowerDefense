@@ -40,13 +40,24 @@ public class UnitPath : MonoBehaviour
     }
 
     /// <summary>
-    /// Setting required path
+    ///  Setting required path and pathpoint position
     /// </summary>
     /// <param name="requestedPathType"></param>
-    public void SetPath(PathType requestedPathType)
+    /// <param name="pathPointIndex"></param>
+    public void SetPath(PathType requestedPathType, int pathPointIndex)
     {
         _path = PathsManager.Instance.GetPath(requestedPathType);
+        _pathpointIndex = pathPointIndex;
         RequestedPathType = requestedPathType;
+    }
+
+    /// <summary>
+    ///  Returns current pathType and pathpointposition
+    /// </summary>
+    /// <returns></returns>
+    public (PathType, int) GetPathData()
+    {
+        return (RequestedPathType, _pathpointIndex);
     }
 
     // Make a small random offset to a copy of pathpointposition to make units move more "live"

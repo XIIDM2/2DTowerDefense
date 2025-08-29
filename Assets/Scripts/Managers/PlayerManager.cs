@@ -13,4 +13,15 @@ public class PlayerManager : Singleton<PlayerManager>
 
         _health = GetComponent<PlayerHealth>();
     }
+
+    public void TMApplyDamageToAllUnits()
+    {
+        var units = FindObjectsByType<UnitHealth>(FindObjectsSortMode.None);
+
+        foreach (var unit in units)
+        {
+            unit.TakeDamage(100);
+        }
+
+    }
 }

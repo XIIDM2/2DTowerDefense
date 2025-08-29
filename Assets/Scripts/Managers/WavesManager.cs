@@ -58,7 +58,8 @@ public class WavesManager : Singleton<WavesManager>
 
                 for (int i = 0; i < units.SpawnAmount; i++)
                 {
-                    Messenger<UnitType, PathType>.Broadcast(GameEvents.SpawnUnit, units.Type, units.PathType);
+                    // event for spawner with information about unit, position, pathtype and pathpointposition (from start so null and 0)
+                    Messenger<UnitType, Vector2?, (PathType, int)>.Broadcast(GameEvents.SpawnUnit, units.Type, null, (units.PathType, 0));
 
                     yield return new WaitForSeconds(units.SpawnIntervalBetweenUnits);
                 }
