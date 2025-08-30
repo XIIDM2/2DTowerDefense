@@ -1,0 +1,66 @@
+using UnityEngine;
+
+public class SceneManager : Singleton<SceneManager>
+{
+    [SerializeField] private bool _allWavesFinished = false;
+    [SerializeField] private int _currentGlobalUnitsAmount = 0;
+
+    private void OnEnable()
+    {
+        Messenger<int>.AddListener(GameEvents.GlobalUnitsAmountChanged, OnGlobalUnitsAmountChanged);
+        Messenger.AddListener(GameEvents.AllWavesFinished, OnAllWavesFinished);
+        Messenger.AddListener(GameEvents.PlayerDead, Defeat);
+
+    }
+
+    private void OnDisable()
+    {
+        Messenger<int>.RemoveListener(GameEvents.GlobalUnitsAmountChanged, OnGlobalUnitsAmountChanged);
+        Messenger.RemoveListener(GameEvents.AllWavesFinished, OnAllWavesFinished);
+        Messenger.RemoveListener(GameEvents.PlayerDead, Defeat);
+    }
+
+    private void OnGlobalUnitsAmountChanged(int value)
+    {
+        _currentGlobalUnitsAmount += value;
+        CheckVictory();
+    }
+
+    private void OnAllWavesFinished()
+    {
+        _allWavesFinished = true;
+    }
+
+    private void CheckVictory()
+    {
+        if (_allWavesFinished && _currentGlobalUnitsAmount == 0)
+        {
+            //Messenger.Broadcast(GameEvents.Victory); // add when add gui
+            testVictory = true;
+        }
+    }
+
+    private void Defeat()
+    {
+        //Messenger.Broadcast(GameEvents.Defeat);
+        testDefeat = true;
+    }
+
+    private bool testVictory = false;
+    private bool testDefeat = false;
+
+
+    private void OnGUI()
+    {   
+        if (testVictory)
+        {
+            GUI.Label(new Rect(960, 590, 200, 100), "Victory");
+        }
+        else if (testDefeat)
+        {
+            GUI.Label(new Rect(960, 590, 200, 100), "Defeat");
+        }
+    }
+
+
+}

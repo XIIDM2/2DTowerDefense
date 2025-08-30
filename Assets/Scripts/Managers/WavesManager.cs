@@ -66,7 +66,7 @@ public class WavesManager : Singleton<WavesManager>
             }
         }
 
-        Debug.Log("All Waves Finished"); // TODO Global event of all waves ended
+        Messenger.Broadcast(GameEvents.AllWavesFinished);
     }
 
 }

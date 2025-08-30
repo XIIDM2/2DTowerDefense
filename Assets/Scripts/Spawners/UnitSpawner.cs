@@ -4,6 +4,9 @@ public class UnitSpawner : MonoBehaviour
 {
     [SerializeField, Range(0.0f, 2.0f)] private float _positionOffsetValue = 2f;
 
+    // Once unit spawned, need to invoke event for each unit (1 unit spawned)
+    private const int UNIT_SPAWN_AMOUNT = 1;
+
     private Factory _factory;
 
     private void Start()
@@ -46,7 +49,28 @@ public class UnitSpawner : MonoBehaviour
             unit = Instantiate(unitPrefab, position.Value, Quaternion.identity);
         }
 
-        unit.GetComponent<UnitPath>().SetPath(pathInfo.pathType, pathInfo.pathPointIndex);  
+        unit.GetComponent<UnitPath>().SetPath(pathInfo.pathType, pathInfo.pathPointIndex);
+
+        // Increase global unit Amount if spawned unit succesfully
+        if (unit != null)
+        {
+            // Invoke event for scene manager that unit spawned
+            switch (unitType)
+            {
+                // If unit is slime we add 2 for total amount since after death 2 baby slimes will appear (magic number 2 = amount of baby slimes, BE CAREFUL!)
+                case UnitType.Slime:
+                    Messenger<int>.Broadcast(GameEvents.GlobalUnitsAmountChanged, UNIT_SPAWN_AMOUNT + 2);
+                    break;
+                    // if babyslime, we skip adding for total amount because already added in slime case
+                case UnitType.BabySlime:
+                    break;
+                default:
+                    Messenger<int>.Broadcast(GameEvents.GlobalUnitsAmountChanged, UNIT_SPAWN_AMOUNT);
+                    break;
+            }
+
+            // solve the issue to be able to spawn babyslime by default
+        }
     }
 
     // Slightly changes spawn position to make waves more "alive"

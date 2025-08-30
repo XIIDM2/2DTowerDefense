@@ -3,9 +3,13 @@ using UnityEngine;
 // this script is mainly for global control of unit behavior
 public class UnitController : MonoBehaviour
 {
+    // Once unit died, need to invoke event for each unit (1 unit died)
+    protected readonly int UNIT_DEATH_AMOUNT = 1;
+
     private UnitAttack _attack;
     private UnitMovement _movement;
     private UnitHealth _health;
+
     protected UnitPath _path;
     protected UnitAnimation _animation;
 
@@ -33,11 +37,17 @@ public class UnitController : MonoBehaviour
     private void OnPathEnd()
     {
         _attack.ApplyDamageToPlayer();
+        // Invoke event for scene manager that unit died by finishing path
+        Messenger<int>.Broadcast(GameEvents.GlobalUnitsAmountChanged, -UNIT_DEATH_AMOUNT);
     }
 
-    protected virtual void OnDeath()
+    private void OnDeath()
     {
         _attack.enabled = false;
         _movement.enabled = false;
+        // Invoke event for scene manager that unit died by being killed
+        Messenger<int>.Broadcast(GameEvents.GlobalUnitsAmountChanged, -UNIT_DEATH_AMOUNT);
     }
+
+
 }
