@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// player info
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObject/Player/PlayerData")]
 public class PlayerData : ScriptableObject
 {

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// scene controller script which changed states of the game
 public class SceneManager : Singleton<SceneManager>
 {
     [SerializeField] private bool _allWavesFinished = false;
@@ -7,7 +8,9 @@ public class SceneManager : Singleton<SceneManager>
 
     private void OnEnable()
     {
+        // check amount of units
         Messenger<int>.AddListener(GameEvents.GlobalUnitsAmountChanged, OnGlobalUnitsAmountChanged);
+        // checks when all waves finished 
         Messenger.AddListener(GameEvents.AllWavesFinished, OnAllWavesFinished);
         Messenger.AddListener(GameEvents.PlayerDead, Defeat);
 
@@ -31,6 +34,7 @@ public class SceneManager : Singleton<SceneManager>
         _allWavesFinished = true;
     }
 
+    // if all units dead and all waves finished = victory
     private void CheckVictory()
     {
         if (_allWavesFinished && _currentGlobalUnitsAmount == 0)
@@ -40,6 +44,7 @@ public class SceneManager : Singleton<SceneManager>
         }
     }
 
+    // if player`s health is 0 = defeat
     private void Defeat()
     {
         //Messenger.Broadcast(GameEvents.Defeat);

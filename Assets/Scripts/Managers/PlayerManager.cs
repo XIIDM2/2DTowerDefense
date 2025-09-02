@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Singleton for player instance
+// Singleton for player instance, which controll player`s resourses
 public class PlayerManager : Singleton<PlayerManager>
 {
     public PlayerHealth Health => _health;
@@ -24,9 +24,11 @@ public class PlayerManager : Singleton<PlayerManager>
 
         _health = GetComponent<PlayerHealth>();
 
+        // init player health
         _health.SetPlayerData(_data);
     }
 
+    // set player`s stats
     private void Start()
     {
         _gold = _data.StartGold;
@@ -35,8 +37,10 @@ public class PlayerManager : Singleton<PlayerManager>
 
     }
 
+   
     private void Update()
     {
+        // increase energy each after each interval
         if (Time.time > _lastEnergyUpdate + _energyGainInterval)
         {
             _energy += _energyGain;

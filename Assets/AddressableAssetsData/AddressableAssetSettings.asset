@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 3972cc5b9a7b47a4b98f753325ac148b
   m_currentHash:
     serializedVersion: 2
-    Hash: 7359842bb3ecf18b557187e96bf3b6ee
+    Hash: f2ddddb86be28d53a9e817b07ca8f286
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
   - {fileID: 11400000, guid: b204d895dfc53f546aa868eb57789bba, type: 2}
+  - {fileID: 11400000, guid: 55e6b142ffd8e6242ad3c2f58e19f390, type: 2}
   - {fileID: 11400000, guid: d8bdd5e3c58f3b94e9a262cd63ba41da, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
@@ -106,6 +107,7 @@ MonoBehaviour:
     - Slime
     - BabySlime
     - Bee
+    - Systems
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 3bf6a26da4ea15b4b83a93da8dd63b4d, type: 2}
