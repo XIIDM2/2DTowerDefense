@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class UnitSpawner : MonoBehaviour
@@ -34,26 +35,22 @@ public class UnitSpawner : MonoBehaviour
     /// <param name="pathType"></param>
     public async void SpawnUnit(UnitType unitType, Vector2? position, (PathType pathType, int pathPointIndex) pathInfo)
     {
-        GameObject unitPrefab = await (_factory.CreateUnit(unitType));
-
-        GameObject unit = null;
-
-        // spawn on default position (spawner position) with random offset - check GetRandomSpawnPoint() method
-        if (!position.HasValue)
+        try
         {
-            unit = Instantiate(unitPrefab, GetRandomSpawnPoint(), Quaternion.identity);
-        }
-        // or spawn at requested position
-        else
-        {
-            unit = Instantiate(unitPrefab, position.Value, Quaternion.identity);
-        }
+            GameObject unitPrefab = await _factory.CreateUnit(unitType);
 
-        unit.GetComponent<UnitPath>().SetPath(pathInfo.pathType, pathInfo.pathPointIndex);
+            GameObject unit = null;
+            // Requested position or default position (spawner position) with random offset - check GetRandomSpawnPoint() method
+            Vector2 spawnPosition = position ?? GetRandomSpawnPoint();
 
-        // Increase global unit Amount if spawned unit succesfully
-        if (unit != null)
-        {
+            // Create gameobject on scene
+            unit = Instantiate(unitPrefab, spawnPosition, Quaternion.identity);
+
+            // Set path for a unit
+            unit.GetComponent<UnitPath>().SetPath(pathInfo.pathType, pathInfo.pathPointIndex);
+
+            // Increase global unit Amount if spawned unit succesfully
+
             // Invoke event for scene manager that unit spawned
             switch (unitType)
             {
@@ -61,15 +58,20 @@ public class UnitSpawner : MonoBehaviour
                 case UnitType.Slime:
                     Messenger<int>.Broadcast(GameEvents.GlobalUnitsAmountChanged, UNIT_SPAWN_AMOUNT + 2);
                     break;
-                    // if babyslime, we skip adding for total amount because already added in slime case
+                // if babyslime, we skip adding for total amount because already added in slime case
                 case UnitType.BabySlime:
                     break;
                 default:
                     Messenger<int>.Broadcast(GameEvents.GlobalUnitsAmountChanged, UNIT_SPAWN_AMOUNT);
                     break;
-            }
 
-            // solve the issue to be able to spawn babyslime by default
+
+                    // TODO solve the issue to be able to spawn babyslime by default
+            }
+        }
+        catch (System.Exception exception)
+        {
+            Debug.LogError($"Failed to instantiate unitPrefab {unitType} with following exception: {exception}");
         }
     }
 
