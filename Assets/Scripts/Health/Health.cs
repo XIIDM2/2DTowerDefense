@@ -1,22 +1,28 @@
 using UnityEngine;
+using UnityEngine.Events;
+using VContainer;
 
-public abstract class Health : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    protected int _maxHealth;
+    public event UnityAction OnHealthChanged;
+    public event UnityAction OnDeath;
+
+    private int _maxHealth;
     private int _currentHealth;
 
-    // Set health data (maxHealth in inherit classes)
-    protected virtual void Start()
+    // we inject ihealthconfig via vcontainer, contract can be via different scriptableobjects such as playerdata,unitdata,towerdata etc,
+    // we need to register service as ihealthconfig aside as required data (make multiregistration service)
+    [Inject] private IHealthConfig _healthData;
+
+    // we assign max health with basehealth of ihealthconfig instance which we recieved through scriptableobject data which has contract ihealthconfig
+    private void Start()
     {
+        _maxHealth = _healthData.BaseHealth;
         _currentHealth = _maxHealth;
     }
-    // abstract events methods for different logic for different classes
-    protected abstract void HealthChangedEventInvoke();
-
-    protected abstract void DeathEventInvoke();
 
     /// <summary>
-    /// Returns currentHealth
+    /// Returns current health
     /// </summary>
     /// <returns></returns>
     public int GetCurrentHealth()
@@ -25,7 +31,7 @@ public abstract class Health : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns maxHealth
+    /// Returns max health
     /// </summary>
     /// <returns></returns>
     public int GetMaxHealth()
@@ -34,7 +40,7 @@ public abstract class Health : MonoBehaviour
     }
 
     /// <summary>
-    /// Apply damage to instance
+    /// Apply damage to entity
     /// </summary>
     /// <param name="amount"></param>
     public void TakeDamage(int amount)
@@ -42,17 +48,17 @@ public abstract class Health : MonoBehaviour
         if (_currentHealth <= 0) return;
 
         _currentHealth -= amount;
-        HealthChangedEventInvoke();
+        OnHealthChanged?.Invoke();
 
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            DeathEventInvoke();
+            OnDeath?.Invoke();
         }
     }
 
     /// <summary>
-    /// Apply healing to instance
+    /// Apply healing to entity
     /// </summary>
     /// <param name="amount"></param>
     public void HealDamage(int amount)
@@ -61,7 +67,7 @@ public abstract class Health : MonoBehaviour
 
         _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
 
-        HealthChangedEventInvoke();
+        OnHealthChanged?.Invoke();
     }
 
 

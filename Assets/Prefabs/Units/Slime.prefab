@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7607274085682977212}
   - component: {fileID: 8684153851744179098}
   - component: {fileID: 2224454811673347395}
-  - component: {fileID: 1759719701987009325}
+  - component: {fileID: 5162353921730863094}
   m_Layer: 0
   m_Name: Visual Model
   m_TagString: Untagged
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 4760546766561923478}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 2b27806cebcf6d74e98a80a57d0815a7, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -158,7 +158,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5879327, y: 0.56981057}
   m_EdgeRadius: 0
---- !u!114 &1759719701987009325
+--- !u!114 &5162353921730863094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4760546766561923478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11660283266989046a026a299e6bd767, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d6bf974692930b41bfd23204c2c5bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToDisolve: 3
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6769196953335487514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e995c9afb217114eac07e70e94bdda7, type: 3}
+  m_Script: {fileID: 11500000, guid: aa3bd8618ef80134e80088a3e01c6b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &29957352617380230

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dacc7974a7a969746b4027a004c2c476, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 6dddd82542d879d459e2d2b9b48c5d36, type: 3}
+  m_Name: GoblinData
   m_EditorClassIdentifier: 
-  baseHealth: 10
-  baseGold: 30
-  baseEnergy: 1
-  baseenergyGain: 1
+  stats: {fileID: 11400000, guid: f428d6a9674d5e5409d95bd396662279, type: 2}
+  animations: {fileID: 11400000, guid: 2f96dfc5acdd6154aa27e14a4288bee9, type: 2}

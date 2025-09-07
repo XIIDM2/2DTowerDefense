@@ -8,6 +8,6 @@ public class UnitLifeTimeSccope : LifetimeScope
     [SerializeField] private UnitData _unitData;
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_unitData);
+        builder.RegisterInstance(_unitData).AsSelf().As<IHealthConfig>();
     }
 }

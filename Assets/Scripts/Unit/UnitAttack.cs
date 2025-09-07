@@ -10,7 +10,7 @@ public class UnitAttack : MonoBehaviour
     // Set values from scriptableobject
     private void Start()
     {
-        _playerDamage = _UnitData.PlayerDamage;
+        //_playerDamage = _UnitData.PlayerDamage;
     }
 
     // Apply damage to player if we finished path (sign to event from path)

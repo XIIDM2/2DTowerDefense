@@ -9,13 +9,13 @@ public class SlimeController : UnitController
 
     private bool _isBabySlimesSpawned = false;
 
-    private SlimeAnimation _slimeAnimation;
+    private SlimeAnimationController _slimeAnimation;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _slimeAnimation = _animation as SlimeAnimation;
+        _slimeAnimation = _animation as SlimeAnimationController;
     }
 
     protected override void OnEnable()

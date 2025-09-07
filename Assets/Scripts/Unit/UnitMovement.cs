@@ -20,7 +20,7 @@ public class UnitMovement : MonoBehaviour
     // Set values from scriptableobject
     private void Start()
     {
-        _movementSpeed = _UnitData.MovementSpeed;
+        //_movementSpeed = _UnitData.MovementSpeed;
     }
 
     private void Update()

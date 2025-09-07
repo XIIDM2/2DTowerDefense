@@ -1,43 +1,52 @@
 using UnityEngine;
+using VContainer;
 
-// Singleton for player instance, which controll player`s resourses
+// Singleton for player instance, which control player`s resourses
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public PlayerHealth Health => _health;
+    public Health Health => _health;
 
-    [SerializeField] private PlayerData _data;
-
-    private int _gold = 30;
+    private int _gold;
 
     [Header("Player Energy")]
     private int _energy;
-    private int _energyGain = 1;
+    private int _energyGain;
     private float _energyGainInterval = 1;
 
     private float _lastEnergyUpdate = float.MinValue;
 
-    private PlayerHealth _health;
+    [Inject] private PlayerData _data;
+
+    private Health _health;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _health = GetComponent<PlayerHealth>();
-
-        // init player health
-        _health.SetPlayerData(_data);
+        _health = GetComponent<Health>();
     }
 
     // set player`s stats
     private void Start()
     {
-        _gold = _data.StartGold;
-        _energy = _data.StartEnergy;
-        _energyGain = _data.EnergyGain;
+        _gold = _data.BaseGold;
+        _energy = _data.BaseEnergy;
+        _energyGain = _data.BaseEnergyGain;
 
     }
 
-   
+    private void OnEnable()
+    {
+        _health.OnHealthChanged += OnPlayerHealthChanged;
+        _health.OnDeath += OnPlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        _health.OnHealthChanged -= OnPlayerHealthChanged;
+        _health.OnDeath -= OnPlayerDeath;
+    }
+
     private void Update()
     {
         // increase energy each after each interval
@@ -47,19 +56,18 @@ public class PlayerManager : Singleton<PlayerManager>
             _lastEnergyUpdate = Time.time;
         }
     }
+    private void OnPlayerHealthChanged()
+    {
+        Messenger.Broadcast(GameEvents.PlayerDamaged);
+    }
+
+    private void OnPlayerDeath()
+    {
+        Messenger.Broadcast(GameEvents.PlayerDead);
+    }
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 540, 100, 50), "Kill All Units"))
-        {
-            var units = FindObjectsByType<UnitHealth>(FindObjectsSortMode.None);
-
-            foreach (var unit in units)
-            {
-                unit.TakeDamage(100);
-            }
-        }
-
         GUI.Box(new Rect(10, 10, 180, 45), "Stats");
 
         GUI.Label(new Rect(20, 30, 50, 30), $"Gold: {_gold}");

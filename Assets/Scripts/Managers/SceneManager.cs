@@ -56,7 +56,17 @@ public class SceneManager : Singleton<SceneManager>
 
 
     private void OnGUI()
-    {   
+    {
+        if (GUI.Button(new Rect(10, 540, 100, 50), "Kill All Units"))
+        {
+            var units = FindObjectsByType<Health>(FindObjectsSortMode.None);
+
+            foreach (var unit in units)
+            {
+                unit.TakeDamage(100);
+            }
+        }
+
         if (testVictory)
         {
             GUI.Label(new Rect(960, 590, 200, 100), "Victory");

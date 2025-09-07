@@ -8,18 +8,18 @@ public class UnitController : MonoBehaviour
 
     private UnitAttack _attack;
     private UnitMovement _movement;
-    private UnitHealth _health;
+    private Health _health;
 
     protected UnitPath _path;
-    protected UnitAnimation _animation;
+    protected UnitAnimationsController _animation;
 
     protected virtual void Awake()
     {
         _attack = GetComponent<UnitAttack>();
         _movement = GetComponent<UnitMovement>();
-        _health = GetComponent<UnitHealth>();
+        _health = GetComponent<Health>();
         _path = GetComponent<UnitPath>();
-        _animation = GetComponentInChildren<UnitAnimation>();
+        _animation = GetComponentInChildren<UnitAnimationsController>();
     }
 
     protected virtual void OnEnable()
@@ -43,6 +43,7 @@ public class UnitController : MonoBehaviour
 
     private void OnDeath()
     {
+        Debug.Log("Death happened");
         _attack.enabled = false;
         _movement.enabled = false;
         // Invoke event for scene manager that unit died by being killed
