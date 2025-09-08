@@ -3,26 +3,31 @@ using VContainer;
 
 public class UnitMovement : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed; // make from scriptableobject later
-    [SerializeField] private int _damageToPlayer;
+    private float _movementSpeed;
 
     private Vector2 _velocity;
 
     private UnitPath _currentPath;
 
-    [Inject] private readonly UnitData _UnitData;
+    /// <summary>
+    /// Script Init method for single point entry - unit controller
+    /// </summary>
+    /// <param name="movementSpeed"></param>
+    public void Init(float movementSpeed)
+    {
+        _movementSpeed = movementSpeed;
+
+        if (movementSpeed <= 0)
+        {
+            Debug.LogWarning($"Movement speed of {gameObject.name} <= 0. If it is not intended, check UnitMovement script");
+        }
+    }
 
     private void Awake()
     {
         _currentPath = GetComponent<UnitPath>();
     }
     
-    // Set values from scriptableobject
-    private void Start()
-    {
-        //_movementSpeed = _UnitData.MovementSpeed;
-    }
-
     private void Update()
     {
         // Unit direction vector and velocity

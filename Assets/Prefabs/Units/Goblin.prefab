@@ -50,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c8a1c8f028c9b43bf52e687a0e8642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 1
-  _damageToPlayer: 0
 --- !u!114 &7533173680542613732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +219,7 @@ Animator:
   m_GameObject: {fileID: 4644839957556240327}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6674c6804b6d96d44832dbe5523c9d94, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

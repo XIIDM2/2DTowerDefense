@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 // this script is mainly for global control of unit behavior
 public class UnitController : MonoBehaviour
@@ -13,6 +14,20 @@ public class UnitController : MonoBehaviour
     protected UnitPath _path;
     protected UnitAnimationsController _animation;
 
+    [Inject] private UnitData _data;
+    
+    /// <summary>
+    /// Sinle Entry Initialization point for unit, use it when we spawn unit (from factory/spawner)
+    /// </summary>
+    /// <param name="unitData"></param>
+    public void Initialize(UnitData unitData)
+    {
+        _attack.Init(unitData.UnitStats.DamageToPlayer);
+        _movement.Init(unitData.UnitStats.MovementSpeed);
+        _health.Init(unitData.UnitStats.BaseHealth);
+        _animation.Init(unitData.UnitAnimations);
+    }
+
     protected virtual void Awake()
     {
         _attack = GetComponent<UnitAttack>();
@@ -20,6 +35,8 @@ public class UnitController : MonoBehaviour
         _health = GetComponent<Health>();
         _path = GetComponent<UnitPath>();
         _animation = GetComponentInChildren<UnitAnimationsController>();
+
+        Initialize(_data);
     }
 
     protected virtual void OnEnable()
@@ -43,7 +60,6 @@ public class UnitController : MonoBehaviour
 
     private void OnDeath()
     {
-        Debug.Log("Death happened");
         _attack.enabled = false;
         _movement.enabled = false;
         // Invoke event for scene manager that unit died by being killed

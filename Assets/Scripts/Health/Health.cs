@@ -8,16 +8,21 @@ public class Health : MonoBehaviour
     public event UnityAction OnDeath;
 
     private int _maxHealth;
+    private int _baseHealth;
     private int _currentHealth;
 
-    // we inject ihealthconfig via vcontainer, contract can be via different scriptableobjects such as playerdata,unitdata,towerdata etc,
-    // we need to register service as ihealthconfig aside as required data (make multiregistration service)
-    [Inject] private IHealthConfig _healthData;
+    /// <summary>
+    /// Script Init method for single point entry - entry point can vary for different objects
+    /// </summary>
+    /// <param name="baseHealth"></param>
+    public void Init(int baseHealth)
+    {
+        _baseHealth = baseHealth;
+    }
 
-    // we assign max health with basehealth of ihealthconfig instance which we recieved through scriptableobject data which has contract ihealthconfig
     private void Start()
     {
-        _maxHealth = _healthData.BaseHealth;
+        _maxHealth = _baseHealth; // later we can scale this amount from different sources
         _currentHealth = _maxHealth;
     }
 

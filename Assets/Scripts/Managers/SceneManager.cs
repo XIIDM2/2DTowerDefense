@@ -63,6 +63,7 @@ public class SceneManager : Singleton<SceneManager>
 
             foreach (var unit in units)
             {
+                if (unit.TryGetComponent<PlayerManager>(out _)) continue;
                 unit.TakeDamage(100);
             }
         }

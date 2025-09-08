@@ -29,6 +29,7 @@ public class PlayerManager : Singleton<PlayerManager>
     // set player`s stats
     private void Start()
     {
+        _health.Init(_data.BaseHealth);
         _gold = _data.BaseGold;
         _energy = _data.BaseEnergy;
         _energyGain = _data.BaseEnergyGain;
@@ -37,13 +38,13 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void OnEnable()
     {
-        _health.OnHealthChanged += OnPlayerHealthChanged;
+         Messenger<int>.AddListener(GameEvents.PlayerDamaged, ApplyDamageToPlayer);
         _health.OnDeath += OnPlayerDeath;
     }
 
     private void OnDisable()
     {
-        _health.OnHealthChanged -= OnPlayerHealthChanged;
+         Messenger<int>.RemoveListener(GameEvents.PlayerDamaged, ApplyDamageToPlayer);
         _health.OnDeath -= OnPlayerDeath;
     }
 
@@ -56,9 +57,9 @@ public class PlayerManager : Singleton<PlayerManager>
             _lastEnergyUpdate = Time.time;
         }
     }
-    private void OnPlayerHealthChanged()
+    private void ApplyDamageToPlayer(int damage)
     {
-        Messenger.Broadcast(GameEvents.PlayerDamaged);
+        _health.TakeDamage(damage);
     }
 
     private void OnPlayerDeath()

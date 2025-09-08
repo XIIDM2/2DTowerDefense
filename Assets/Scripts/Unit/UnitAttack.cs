@@ -1,22 +1,27 @@
 using UnityEngine;
-using VContainer;
 
 public class UnitAttack : MonoBehaviour
 {
-    private int _playerDamage;
+    private int _damageToPlayer;
 
-    [Inject] private readonly UnitData _UnitData;
-
-    // Set values from scriptableobject
-    private void Start()
+    /// <summary>
+    /// Script Init method for single point entry - unit controller
+    /// </summary>
+    /// <param name="damageToPlayer"></param>
+    public void Init(int damageToPlayer)
     {
-        //_playerDamage = _UnitData.PlayerDamage;
+        _damageToPlayer = damageToPlayer;
     }
 
     // Apply damage to player if we finished path (sign to event from path)
     public void ApplyDamageToPlayer()
     {
-        PlayerManager.Instance.Health.TakeDamage(_playerDamage);
+        if (_damageToPlayer <= 0)
+        {
+            Debug.LogWarning($"Damage to player from {gameObject.name} <= 0. If it is not intended, check UnitAttack script");
+        }
+
+        Messenger<int>.Broadcast(GameEvents.PlayerDamaged, _damageToPlayer);
         Destroy(gameObject);
     }
 }

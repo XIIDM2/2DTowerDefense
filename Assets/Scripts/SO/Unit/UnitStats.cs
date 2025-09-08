@@ -5,11 +5,11 @@ public class UnitStats : ScriptableObject
 {
     [SerializeField] private int baseHealth;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private int playerDamage;
-    [SerializeField] private int unitDamage;
+    [SerializeField] private int damageToPlayer;
+    [SerializeField] private int damageToUnit;
 
     public int BaseHealth => baseHealth;
     public float MovementSpeed => movementSpeed;
-    public int PlayerDamage => playerDamage;
-    public int UnitDamage => unitDamage;
+    public int DamageToPlayer => damageToPlayer;
+    public int DamageToUnit => damageToUnit;
 }

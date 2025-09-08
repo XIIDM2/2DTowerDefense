@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Unit Animations", menuName = "ScriptableObjects/Unit/UnitAnimations")]
@@ -23,24 +24,44 @@ public class UnitAnimations : ScriptableObject
     [SerializeField] private AnimationClip U_Disolve;
     [SerializeField] private AnimationClip U_Walk;
 
-    // public getters to animationClips
+    private Dictionary<string, AnimationClip> _animationsDict;
 
-    [Header("Down Direction")]
-    public AnimationClip Down_Attack => D_Attack;
-    public AnimationClip Down_Death => D_Death;
-    public AnimationClip Down_Disolve => D_Disolve;
-    public AnimationClip Down_Walk => D_Walk;
+    public AnimationClip GetClip(string clipName)
+    {
+        if (_animationsDict == null || _animationsDict.Count == 0) dictInit();
 
-    [Header("Side Direction")]
-    public AnimationClip Side_Attack => S_Attack;
-    public AnimationClip Side_Death => S_Death;
-    public AnimationClip Side_Disolve => S_Disolve;
-    public AnimationClip Side_Walk => S_Walk;
+        if (_animationsDict.TryGetValue(clipName, out var clip))
+        {
+            return clip;
+        }
+        else
+        {
+            Debug.LogWarning("Unit Animation SO dictionary failed to find requested animation clip");
+            return null;
+        }
+    }
 
-    [Header("Up Direction")]
-    public AnimationClip Up_Attack => U_Attack;
-    public AnimationClip Up_Death => U_Death;
-    public AnimationClip Up_Disolve => U_Disolve;
-    public AnimationClip Up_Walk => U_Walk;
+
+    // i decided to init dict manually for QoL in inspector (avoid array). In future will add autoread from fields in inspector if will be more animations
+    private void dictInit()
+    {
+        _animationsDict = new Dictionary<string, AnimationClip>()
+        {
+            { "D_Attack", D_Attack },
+            { "D_Death", D_Death },
+            { "D_Disolve", D_Disolve },
+            { "D_Walk", D_Walk },
+
+            { "S_Attack", S_Attack },
+            { "S_Death", S_Death },
+            { "S_Disolve", S_Disolve },
+            { "S_Walk", S_Walk },
+
+            { "U_Attack", U_Attack },
+            { "U_Death", U_Death },
+            { "U_Disolve", U_Disolve },
+            { "U_Walk", U_Walk },
+        };
+    }
 
 }

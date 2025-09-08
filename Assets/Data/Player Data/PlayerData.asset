@@ -15,4 +15,4 @@ MonoBehaviour:
   baseHealth: 10
   baseGold: 30
   baseEnergy: 1
-  baseenergyGain: 1
+  baseEnergyGain: 1
