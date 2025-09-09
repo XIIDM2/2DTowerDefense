@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // scene controller script which changed states of the game
-public class SceneManager : Singleton<SceneManager>
+public class SceneManager : MonoBehaviour, ISceneController
 {
     [SerializeField] private bool _allWavesFinished = false;
     [SerializeField] private int _currentGlobalUnitsAmount = 0;

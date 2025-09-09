@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using VContainer;
 
 public class UnitPath : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class UnitPath : MonoBehaviour
     [field: SerializeField] public PathType RequestedPathType { get; private set; }
 
     [SerializeField] private float _distanceToNextPoint = 0.5f; // 0.5f is base value
+
+    [Inject] private PathsManager _pathsManager;
 
     /// <summary>
     ///  Value to offset pathpoint position to make units move a little random so game feels "live"
@@ -46,7 +49,7 @@ public class UnitPath : MonoBehaviour
     /// <param name="pathPointIndex"></param>
     public void SetPath(PathType requestedPathType, int pathPointIndex)
     {
-        _path = PathsManager.Instance.GetPath(requestedPathType);
+        _path = _pathsManager.GetPath(requestedPathType);
         _pathpointIndex = pathPointIndex;
         RequestedPathType = requestedPathType;
     }
