@@ -2,7 +2,7 @@ using UnityEngine;
 using VContainer;
 
 // Singleton for player instance, which control player`s resourses
-public class PlayerManager : Singleton<PlayerManager>
+public class PlayerManager : MonoBehaviour, IPlayerController
 {
     public Health Health => _health;
 
@@ -19,10 +19,8 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private Health _health;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         _health = GetComponent<Health>();
     }
 

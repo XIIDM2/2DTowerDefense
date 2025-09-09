@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WavesManager : Singleton<WavesManager>
+public class WavesManager : MonoBehaviour, IWavesController
 {
     // Wave class with information about wave units
     [System.Serializable]

@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Systems
   m_GUID: 476e61dc4b743094287ee1bbce057acc
-  m_SerializeEntries:
-  - m_GUID: 2cb3db45a79ec3648840d5199b943097
-    m_Address: Assets/Prefabs/Systems.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Systems
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5108f4bf45fb38346baf0750a82e8d85, type: 2}
   m_SchemaSet:
