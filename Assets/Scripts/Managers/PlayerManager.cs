@@ -2,7 +2,7 @@ using UnityEngine;
 using VContainer;
 
 // Singleton for player instance, which control player`s resourses
-public class PlayerManager : MonoBehaviour, IPlayerController
+public class PlayerManager : MonoBehaviour, IPlayerService
 {
     public Health Health => _health;
 

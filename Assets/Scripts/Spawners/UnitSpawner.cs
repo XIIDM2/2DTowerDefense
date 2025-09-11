@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 public class UnitSpawner : MonoBehaviour
 {
@@ -8,12 +10,10 @@ public class UnitSpawner : MonoBehaviour
     // Once unit spawned, need to invoke event for each unit (1 unit spawned)
     private const int UNIT_SPAWN_AMOUNT = 1;
 
-    private Factory _factory;
+   [Inject] private Factory _factory; 
+   [Inject] private IObjectResolver _resolver; 
+   [Inject] private UnitDatabase _unitDatabase;
 
-    private void Start()
-    {
-        _factory = new Factory();
-    }
 
     // We sign for a global event from messenger to spawn a unit when event happens
     private void OnEnable()
@@ -39,12 +39,17 @@ public class UnitSpawner : MonoBehaviour
         {
             GameObject unitPrefab = await _factory.CreateUnit(unitType);
 
+
             GameObject unit = null;
             // Requested position or default position (spawner position) with random offset - check GetRandomSpawnPoint() method
             Vector2 spawnPosition = position ?? GetRandomSpawnPoint();
 
             // Create gameobject on scene
-            unit = Instantiate(unitPrefab, spawnPosition, Quaternion.identity);
+            unit = _resolver.Instantiate(unitPrefab, spawnPosition, Quaternion.identity);
+
+            // init unit
+            UnitController unitController = unit.GetComponent<UnitController>();
+            unitController.Initialize(_unitDatabase.GetData(unitType));
 
             // Set path for a unit
             unit.GetComponent<UnitPath>().SetPath(pathInfo.pathType, pathInfo.pathPointIndex);

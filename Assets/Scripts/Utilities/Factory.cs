@@ -8,7 +8,7 @@ public class Factory
     // Dictionary with unit`s names and prefabs
     private Dictionary<string, GameObject> _unitDictionary = new Dictionary<string, GameObject>();
 
-    string label = string.Empty;
+    string _label = string.Empty;
 
     /// <summary>
     /// Creates unit link to prefab
@@ -18,11 +18,11 @@ public class Factory
     public async UniTask<GameObject> CreateUnit(UnitType type)
     {
         // Converting type to label (label must be with same type name)
-        label = type.ToString();
+        _label = type.ToString();
         GameObject requestedUnit = null;
 
         // If unit exists in dict, assign unit
-        if (_unitDictionary.TryGetValue(label, out GameObject unit))
+        if (_unitDictionary.TryGetValue(_label, out GameObject unit))
         {
             requestedUnit = unit;
         }
@@ -31,8 +31,8 @@ public class Factory
         {
             try
             {
-                requestedUnit = await Addressables.LoadAssetAsync<GameObject>(label).ToUniTask();
-                _unitDictionary[label] = requestedUnit;
+                requestedUnit = await Addressables.LoadAssetAsync<GameObject>(_label).ToUniTask();
+                _unitDictionary[_label] = requestedUnit;
             }
             catch (System.Exception exception)
             {

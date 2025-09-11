@@ -26,9 +26,20 @@ public class UnitAnimations : ScriptableObject
 
     private Dictionary<string, AnimationClip> _animationsDict;
 
+    private bool _isInit = false;
+
+    private void OnEnable()
+    {
+        DictInit();
+    }
+
     public AnimationClip GetClip(string clipName)
     {
-        if (_animationsDict == null || _animationsDict.Count == 0) dictInit();
+        if (!_isInit || _animationsDict == null)
+        {
+            Debug.LogError("Unit animations dictionary not initialized check unit animations SO, initializing again");
+            DictInit();
+        }
 
         if (_animationsDict.TryGetValue(clipName, out var clip))
         {
@@ -43,8 +54,10 @@ public class UnitAnimations : ScriptableObject
 
 
     // i decided to init dict manually for QoL in inspector (avoid array). In future will add autoread from fields in inspector if will be more animations
-    private void dictInit()
+    public void DictInit()
     {
+        _isInit = false;
+
         _animationsDict = new Dictionary<string, AnimationClip>()
         {
             { "D_Attack", D_Attack },
@@ -62,6 +75,8 @@ public class UnitAnimations : ScriptableObject
             { "U_Disolve", U_Disolve },
             { "U_Walk", U_Walk },
         };
+
+        _isInit = true;
     }
 
 }

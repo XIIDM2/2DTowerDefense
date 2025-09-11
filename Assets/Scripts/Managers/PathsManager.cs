@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PathsManager : MonoBehaviour, IPathController
+public class PathsManager : MonoBehaviour, IPathService
 {
     // Paths information
     [System.Serializable]
