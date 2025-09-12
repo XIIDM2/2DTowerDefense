@@ -267,6 +267,7 @@ MonoBehaviour:
   _wavesManager: {fileID: 558689108}
   _sceneManager: {fileID: 1664541925}
   _pathManager: {fileID: 973779161}
+  _wavesData: {fileID: 11400000, guid: 5e6a1d0630b5e1847a1a5249d10a66d8, type: 2}
   _unitSpawner: {fileID: 1975014545}
 --- !u!1 &121840266
 GameObject:
@@ -1621,40 +1622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19e86d34abb887469fb2ac41e7d82f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseBetweenWaves: 2
-  _waves:
-  - _waveUnits:
-    - _spawnTimer: 0
-      _spawnIntervalBetweenUnits: 0
-      _type: 2
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 2
-      _spawnIntervalBetweenUnits: 0
-      _type: 0
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 1
-      _spawnIntervalBetweenUnits: 0
-      _type: 1
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 3
-      _spawnIntervalBetweenUnits: 0
-      _type: 4
-      _pathType: 0
-      _spawnAmount: 1
-  - _waveUnits:
-    - _spawnTimer: 0
-      _spawnIntervalBetweenUnits: 0
-      _type: 0
-      _pathType: 0
-      _spawnAmount: 2
-    - _spawnTimer: 3
-      _spawnIntervalBetweenUnits: 0
-      _type: 2
-      _pathType: 0
-      _spawnAmount: 1
 --- !u!1 &565889938
 GameObject:
   m_ObjectHideFlags: 0

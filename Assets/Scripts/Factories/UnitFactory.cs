@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class Factory
+public class UnitFactory : IUnitFactory
 {
     // Dictionary with unit`s names and prefabs
     private Dictionary<string, GameObject> _unitDictionary = new Dictionary<string, GameObject>();
-
-    string _label = string.Empty;
 
     /// <summary>
     /// Creates unit link to prefab
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public async UniTask<GameObject> CreateUnit(UnitType type)
+    public async UniTask<GameObject> Load(string label)
     {
         // Converting type to label (label must be with same type name)
-        _label = type.ToString();
         GameObject requestedUnit = null;
 
         // If unit exists in dict, assign unit
-        if (_unitDictionary.TryGetValue(_label, out GameObject unit))
+        if (_unitDictionary.TryGetValue(label, out GameObject unit))
         {
             requestedUnit = unit;
         }
@@ -31,8 +28,8 @@ public class Factory
         {
             try
             {
-                requestedUnit = await Addressables.LoadAssetAsync<GameObject>(_label).ToUniTask();
-                _unitDictionary[_label] = requestedUnit;
+                requestedUnit = await Addressables.LoadAssetAsync<GameObject>(label).ToUniTask();
+                _unitDictionary[label] = requestedUnit;
             }
             catch (System.Exception exception)
             {
@@ -43,4 +40,5 @@ public class Factory
 
         return requestedUnit;
     }
+
 }

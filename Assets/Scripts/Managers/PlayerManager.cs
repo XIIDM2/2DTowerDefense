@@ -2,6 +2,7 @@ using UnityEngine;
 using VContainer;
 
 // Singleton for player instance, which control player`s resourses
+[RequireComponent(typeof(Health))]
 public class PlayerManager : MonoBehaviour, IPlayerService
 {
     public Health Health => _health;
