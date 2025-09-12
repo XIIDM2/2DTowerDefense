@@ -3,9 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Unit Data", menuName = "ScriptableObjects/Unit/UnitData")]
 public class UnitData : ScriptableObject, IHealthConfig
 {
+    [SerializeField] private UnitType type;
     [SerializeField] private UnitStats stats;
     [SerializeField] private UnitAnimations animations;
 
+    public UnitType Type => type;
     public UnitStats UnitStats => stats;
     public UnitAnimations UnitAnimations => animations;
 

@@ -14,7 +14,7 @@ public class UnitController : MonoBehaviour
     protected UnitPath _path;
     protected UnitAnimationsController _animation;
 
-    [Inject] private UnitData _data;
+    private UnitData _data;
     
     /// <summary>
     /// Sinle Entry Initialization point for unit, use it when we spawn unit (from factory/spawner)
@@ -36,7 +36,6 @@ public class UnitController : MonoBehaviour
         _path = GetComponent<UnitPath>();
         _animation = GetComponentInChildren<UnitAnimationsController>();
 
-        Initialize(_data);
     }
 
     protected virtual void OnEnable()

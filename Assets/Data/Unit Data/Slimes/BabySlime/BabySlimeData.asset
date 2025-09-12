@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dddd82542d879d459e2d2b9b48c5d36, type: 3}
-  m_Name: BabySlime
+  m_Name: BabySlimeData
   m_EditorClassIdentifier: 
+  type: 3
   stats: {fileID: 11400000, guid: c61f4288fc88a444a8c5a87e1ae2b7cc, type: 2}
   animations: {fileID: 11400000, guid: 6a581785e3d0b8c4e916b0181ab70bba, type: 2}

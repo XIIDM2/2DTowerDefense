@@ -46,5 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentReference:
     TypeName: 
-  autoRun: 0
+  autoRun: 1
   autoInjectGameObjects: []
+  unitDatabase: {fileID: 11400000, guid: 0e0861f06ce439047b07757eb17d5604, type: 2}
+  playerData: {fileID: 11400000, guid: ae3e5c792f5a43e4abf2e49ab23cbba5, type: 2}

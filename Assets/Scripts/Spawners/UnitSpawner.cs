@@ -1,30 +1,31 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
-public class UnitSpawner : MonoBehaviour
+public class UnitSpawner : MonoBehaviour, IUnitSpawner
 {
     [SerializeField, Range(0.0f, 2.0f)] private float _positionOffsetValue = 2f;
 
     // Once unit spawned, need to invoke event for each unit (1 unit spawned)
     private const int UNIT_SPAWN_AMOUNT = 1;
 
-    private Factory _factory;
+   [Inject] private readonly UnitFactory _factory; 
+   [Inject] private readonly IObjectResolver _resolver; 
+   [Inject] private readonly UnitDatabase _unitDatabase;
 
-    private void Start()
-    {
-        _factory = new Factory();
-    }
 
     // We sign for a global event from messenger to spawn a unit when event happens
     private void OnEnable()
     {
-        Messenger<UnitType, Vector2?, (PathType, int)>.AddListener(GameEvents.SpawnUnit, SpawnUnit);
+        Messenger<UnitType, Vector2?, (PathType, int)>.AddListener(GameEvents.SpawnUnit, Spawn);
     }
 
     // We resign from a global event from messenger
     private void OnDisable()
     {
-        Messenger<UnitType, Vector2?, (PathType, int)>.RemoveListener(GameEvents.SpawnUnit, SpawnUnit);
+        Messenger<UnitType, Vector2?, (PathType, int)>.RemoveListener(GameEvents.SpawnUnit, Spawn);
+
     }
 
     /// <summary>
@@ -33,18 +34,23 @@ public class UnitSpawner : MonoBehaviour
     /// <param name="unitType"></param>
     /// <param name="position"></param>
     /// <param name="pathType"></param>
-    public async void SpawnUnit(UnitType unitType, Vector2? position, (PathType pathType, int pathPointIndex) pathInfo)
+    public async void Spawn(UnitType unitType, Vector2? position, (PathType pathType, int pathPointIndex) pathInfo)
     {
         try
         {
-            GameObject unitPrefab = await _factory.CreateUnit(unitType);
+            GameObject unitPrefab = await _factory.Load(unitType.ToString());
+
 
             GameObject unit = null;
             // Requested position or default position (spawner position) with random offset - check GetRandomSpawnPoint() method
             Vector2 spawnPosition = position ?? GetRandomSpawnPoint();
 
             // Create gameobject on scene
-            unit = Instantiate(unitPrefab, spawnPosition, Quaternion.identity);
+            unit = _resolver.Instantiate(unitPrefab, spawnPosition, Quaternion.identity);
+
+            // init unit
+            UnitController unitController = unit.GetComponent<UnitController>();
+            unitController.Initialize(_unitDatabase.GetData(unitType));
 
             // Set path for a unit
             unit.GetComponent<UnitPath>().SetPath(pathInfo.pathType, pathInfo.pathPointIndex);

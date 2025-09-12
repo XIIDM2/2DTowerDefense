@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class Factory
+public class UnitFactory : IUnitFactory
 {
     // Dictionary with unit`s names and prefabs
     private Dictionary<string, GameObject> _unitDictionary = new Dictionary<string, GameObject>();
-
-    string label = string.Empty;
 
     /// <summary>
     /// Creates unit link to prefab
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public async UniTask<GameObject> CreateUnit(UnitType type)
+    public async UniTask<GameObject> Load(string label)
     {
         // Converting type to label (label must be with same type name)
-        label = type.ToString();
         GameObject requestedUnit = null;
 
         // If unit exists in dict, assign unit
@@ -43,4 +40,5 @@ public class Factory
 
         return requestedUnit;
     }
+
 }

@@ -8,10 +8,10 @@ public class AudioSystem : IAudioService, IStartable
     private const string SFX_SOURCE_NAME = "SFX Source";
     private const string MUSIC_SOURCE_NAME = "Music Source";
 
-    private  AudioSource _musicSource;
-    private  AudioSource _sfxSource;
+    private AudioSource _musicSource;
+    private AudioSource _sfxSource;
 
-    void IStartable.Start()
+    public void Start()
     {
         CreateAudioSources();
 

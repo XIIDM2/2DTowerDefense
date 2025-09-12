@@ -260,13 +260,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: 
-  autoRun: 0
+    TypeName: ProjectLifeTimeScope
+  autoRun: 1
   autoInjectGameObjects: []
   _playerManager: {fileID: 1906573100}
   _wavesManager: {fileID: 558689108}
   _sceneManager: {fileID: 1664541925}
   _pathManager: {fileID: 973779161}
+  _wavesData: {fileID: 11400000, guid: 5e6a1d0630b5e1847a1a5249d10a66d8, type: 2}
+  _unitSpawner: {fileID: 1975014545}
 --- !u!1 &121840266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1513,7 @@ Transform:
   - {fileID: 1906573099}
   - {fileID: 973779160}
   - {fileID: 558689107}
+  - {fileID: 1975014544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545416586
@@ -1604,8 +1607,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1975014544}
+  m_Children: []
   m_Father: {fileID: 529490267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &558689108
@@ -1620,40 +1622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19e86d34abb887469fb2ac41e7d82f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseBetweenWaves: 2
-  _waves:
-  - _waveUnits:
-    - _spawnTimer: 0
-      _spawnIntervalBetweenUnits: 0
-      _type: 2
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 2
-      _spawnIntervalBetweenUnits: 0
-      _type: 0
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 1
-      _spawnIntervalBetweenUnits: 0
-      _type: 1
-      _pathType: 0
-      _spawnAmount: 1
-    - _spawnTimer: 3
-      _spawnIntervalBetweenUnits: 0
-      _type: 4
-      _pathType: 0
-      _spawnAmount: 1
-  - _waveUnits:
-    - _spawnTimer: 0
-      _spawnIntervalBetweenUnits: 0
-      _type: 0
-      _pathType: 0
-      _spawnAmount: 2
-    - _spawnTimer: 3
-      _spawnIntervalBetweenUnits: 0
-      _type: 2
-      _pathType: 0
-      _spawnAmount: 1
 --- !u!1 &565889938
 GameObject:
   m_ObjectHideFlags: 0
@@ -18520,7 +18488,6 @@ GameObject:
   - component: {fileID: 1906573099}
   - component: {fileID: 1906573100}
   - component: {fileID: 1906573101}
-  - component: {fileID: 1906573102}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -18567,24 +18534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3bd8618ef80134e80088a3e01c6b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1906573102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906573098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c535f1236514ab4db65856307bc2d07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 1906573098}
-  _playerData: {fileID: 11400000, guid: ae3e5c792f5a43e4abf2e49ab23cbba5, type: 2}
 --- !u!1 &1934038006
 GameObject:
   m_ObjectHideFlags: 0
@@ -19119,12 +19068,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975014543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 11.5, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 558689107}
+  m_Father: {fileID: 529490267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1975014545
 MonoBehaviour:

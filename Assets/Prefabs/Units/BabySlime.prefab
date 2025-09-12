@@ -185,7 +185,6 @@ GameObject:
   - component: {fileID: 3571402679261503718}
   - component: {fileID: -4327444552599576799}
   - component: {fileID: 4659765665042027321}
-  - component: {fileID: -1058043389336896546}
   m_Layer: 0
   m_Name: BabySlime
   m_TagString: Untagged
@@ -272,21 +271,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428dc053652ea94498b5335bd59f61bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1058043389336896546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057844722518317413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 031f5a42e1ee0f341bb15ef8707d6d99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 9057844722518317413}
-  _unitData: {fileID: 11400000, guid: 68a365f6be3a4c944a500bd2f470f1fb, type: 2}
